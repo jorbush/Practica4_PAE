@@ -35,16 +35,32 @@ void EUSCIA2_IRQHandler(void) {  //interrupcion de recepcion en la UART A2
 
 void Activa_Timer_TimeOut() {
 	// TODO: Implementar iniciar timer
+
+	TA1CTL |= 0x0200; //MC_2. El timercompta de forma cíclica des de 0 al seu valor màxim. Esta activat el bit 9, el timer selecciona la font SMCLK.
+	TA1CTL &= 0xFE09; // Desactivem la resta de bits per si estan activats.
+	TA1CCR0 = 0x5DC0; // Establim el limit del comptador.
+	TA1CCTL0 |= CCIE; // Habilitem l'interrupció.
 }
 
 
 void Reset_Timeout() {
 	// TODO: Implementar reset comptador time out
+	 contimer = 0;
+
 }
 
 bool TimeOut(uint16_t cnt) {
-	// TODO: Implementar check time out
-	return false;
+	   Reset_Timeout();
+	   TA1CTL |= 0x0010; //Activem el bit quatre ("Up mode", el comptador va cap amunt fins arribar a TA0CCR0).
+	   TA1CTL &= ~0x0020; // Desactivem la resta de bits.
+	   volatile uint32_t i = cnt;
+	   do   { //El "delay()" no es mas que un bucle tonto para perder tiempo
+	  }
+	   while (contimer < i);//Basicamente hacemos un do-while que disminuya el tiempo que hemos
+	                  //puesto por parametros hasta 0, despues termina el bucle
+
+	   TA1CTL &= ~0x0030; //Desactivem tots els bits, inclos el 4 que es el que hem estat utilitzant.
+	   return true;
 }
 
 void rx_uart_byte(struct RxReturn respuesta) {
