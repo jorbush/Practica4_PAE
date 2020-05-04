@@ -13,4 +13,11 @@
 sem_t sem_tx_msp;
 sem_t sem_tx_cli;
 
+enum dyn_module
+{
+	MOTOR_LEFT = 0,
+	MOTOR_RIGHT = 1,
+	SENSOR = 2
+};
+
 #endif /* MAIN_H_ */

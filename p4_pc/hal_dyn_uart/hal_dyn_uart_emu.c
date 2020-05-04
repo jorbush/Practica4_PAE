@@ -51,12 +51,12 @@ void Init_UART(void){
 /* Funcions per canviar el sentit de les comunicacions: */
 
 /* Funció per canviar el sentit de les dades a RX */
-void Sentit_Dades_Rx_emu(void) {{ //Configuració del Half Duplex dels motors: Recepció
+void Sentit_Dades_Rx_emu(void) { //Configuració del Half Duplex dels motors: Recepció
 	// P3OUT &= ~BIT0; //El pin P3.0 (DIRECTION_PORT) el posem a 0 Rx
 	printf("Changed direction to RX\n");
 }
 /* Funció per canviar el sentit de les dades a TX */
-void Sentit_Dades_Tx_emu(void) {{//Configuració del Half Duplex dels motors: Transmissió
+void Sentit_Dades_Tx_emu(void) { //Configuració del Half Duplex dels motors: Transmissió
 	// P3OUT |= BIT0;//El pin P3.0 (DIRECTION_PORT) el posem a 1 Tx
 	printf("Changed direction to TX\n");
 }
